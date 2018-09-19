@@ -39,5 +39,10 @@ public class GlideHelper {
                     crossFade().into(imageView);
     }
 
+    public void load(Context context,int redId,ImageView imageView){
+            Glide.with(context).load(redId).diskCacheStrategy(DiskCacheStrategy.ALL).
+                    crossFade().into(imageView);
+    }
+
 
 }

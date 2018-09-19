@@ -317,6 +317,29 @@ public class Kits {
         public final static String FILE_EXTENSION_SEPARATOR = ".";
 
         /**
+         * 将assets文件内的城市文件转为String
+         *
+         * @param context
+         * @param fileName assets文件内文件的名字
+         * @return
+         */
+        public static String readAssets(Context context, String fileName) {
+            try {
+                InputStreamReader inputReader = new InputStreamReader(context.getResources()
+                        .getAssets().open(fileName));
+                BufferedReader bufReader = new BufferedReader(inputReader);
+                String line = "";
+                StringBuffer Result = new StringBuffer();
+                while ((line = bufReader.readLine()) != null)
+                    Result.append(line);
+                return Result.toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return "";
+        }
+
+        /**
          * read file
          *
          * @param filePath

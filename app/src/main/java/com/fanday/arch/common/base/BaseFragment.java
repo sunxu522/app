@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.fanday.arch.ui.dialog.LoadingDialog;
 import com.gyf.barlibrary.ImmersionBar;
 
 import java.io.Serializable;
@@ -29,12 +30,20 @@ public abstract class BaseFragment extends Fragment implements BaseView{
     protected View mRootView;
     protected ImmersionBar mImmersionBar;
     private Unbinder unbinder;
+    private LoadingDialog loadingDialog;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = activity;
         mContext = activity;
+        loadingDialog = createLoadingDialog();
+    }
+
+    public LoadingDialog createLoadingDialog() {
+        if (loadingDialog != null)
+            return loadingDialog;
+        return new LoadingDialog(mActivity);
     }
 
 
@@ -71,10 +80,6 @@ public abstract class BaseFragment extends Fragment implements BaseView{
 
     }
 
-    public BaseFragment() {
-
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -82,14 +87,17 @@ public abstract class BaseFragment extends Fragment implements BaseView{
         mContext = context;
     }
 
-
     @Override
-
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (!hidden && mImmersionBar != null) {
-            mImmersionBar.init();
+        if (!hidden) {
+            if(mImmersionBar != null) mImmersionBar.init();
+            refresh();
         }
+    }
+
+    private void refresh() {
+
     }
 
     protected abstract int getLayoutId();
@@ -121,14 +129,14 @@ public abstract class BaseFragment extends Fragment implements BaseView{
      * view与数据绑定
      */
 
-    protected abstract void initView();
+    protected void initView(){}
 
 
     /**
      * 设置监听
      */
 
-    protected abstract void setListener();
+    protected void setListener(){}
 
     /**
      * 初始化数据
@@ -139,12 +147,12 @@ public abstract class BaseFragment extends Fragment implements BaseView{
 
     @Override
     public void showLoading() {
-
+        loadingDialog.show();
     }
 
     @Override
     public void dismissLoading() {
-
+        loadingDialog.dismiss();
     }
 
     @Override
