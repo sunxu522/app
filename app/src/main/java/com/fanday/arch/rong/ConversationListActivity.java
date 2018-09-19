@@ -1,4 +1,4 @@
-package com.fanday.arch.activity.rong;
+package com.fanday.arch.rong;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;

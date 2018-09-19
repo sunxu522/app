@@ -1,4 +1,4 @@
-package com.fanday.arch.activity;
+package com.fanday.arch;
 
 import com.fanday.arch.R;
 import com.fanday.arch.bean.Person;

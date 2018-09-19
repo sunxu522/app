@@ -1,4 +1,4 @@
-package com.fanday.arch.receiver;
+package com.fanday.arch.rong;
 
 import android.content.Context;
 
