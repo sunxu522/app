@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.fanday.arch.R;
 import com.fanday.arch.ui.dialog.LoadingDialog;
 import com.fanday.arch.interactor.net.API;
 import com.gyf.barlibrary.ImmersionBar;
@@ -53,7 +54,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected void initStatueBar() {
 //        ImmersionBar.with(this).fitsSystemWindows(true).keyboardMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN).statusBarColor(activityThemeColor()).init();
         //在BaseActivity里初始化
-        ImmersionBar.with(this).init();
+        ImmersionBar.with(this).fitsSystemWindows(true).statusBarColor(R.color.color_f44f37).init();
     }
 
 
@@ -88,6 +89,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.onDestroy();
         if (unbinder != null) {
             unbinder.unbind();
+        }
+        if(loadingDialog!=null){
+            loadingDialog.cancel();
+            loadingDialog.dismiss();
         }
         ImmersionBar.with(this).destroy(); //必须调用该方法，防止内存泄漏
         WinManager.get().removeActivity(this);

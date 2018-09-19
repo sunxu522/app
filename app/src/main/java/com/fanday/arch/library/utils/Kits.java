@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -14,6 +16,8 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
+import com.fanday.arch.common.base.App;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -249,6 +253,27 @@ public class Kits {
             wm.getDefaultDisplay().getMetrics(outMetrics);
             return outMetrics.heightPixels;
         }
+    }
+
+    public static class UIKits {
+        public static Drawable getDrawable(int resId) {
+            return App.getInstance().getResources().getDrawable(resId);
+        }
+
+        public static int getStatusBarHeight() {
+            int result = 0;
+            try {
+                Class clazz = Class.forName("com.android.internal.R$dimen");
+                Object object = clazz.newInstance();
+                int resourceId = Integer.parseInt(clazz.getField("status_bar_height").get(object).toString());
+                if (resourceId > 0)
+                    result = App.getInstance().getResources().getDimensionPixelSize(resourceId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+
     }
 
     /**

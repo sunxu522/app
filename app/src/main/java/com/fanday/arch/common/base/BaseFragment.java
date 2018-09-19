@@ -74,6 +74,10 @@ public abstract class BaseFragment extends Fragment implements BaseView{
         if (unbinder != null) {
             unbinder.unbind();
         }
+        if(loadingDialog!=null){
+            loadingDialog.cancel();
+            loadingDialog.dismiss();
+        }
         if (mImmersionBar != null) {
             mImmersionBar.destroy();
         }
