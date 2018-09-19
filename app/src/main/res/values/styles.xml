@@ -4,6 +4,10 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimaryDark">@color/color_f44f37</item>
+        <!--一般控件的选中效果默认采用该颜色,如 CheckBox,RadioButton,SwitchCompat EditText的光标颜色等-->
+        <item name="colorAccent">#b3b9b3</item>
+        <!--窗口背景颜色,此处不允许直接赋值如 #FFFFFF，必须在color中定义使用-->
+        <item name="android:windowBackground">@android:color/white</item>
     </style>
 
 
@@ -16,6 +20,54 @@
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!--带有清楚按钮的editText样式-->
+    <style name="clear_edit_text">
+        <item name="android:layout_marginLeft">@dimen/dp_40</item>
+        <item name="android:layout_marginRight">@dimen/dp_40</item>
+        <item name="android:layout_marginTop">@dimen/dp_30</item>
+        <item name="android:drawableRight">@drawable/icon_login_del</item>
+        <item name="android:drawableLeft">@drawable/icon_login_phone</item>
+        <item name="android:background">@drawable/shape_rect_outline_d2d2d2_r6</item>
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingRight">@dimen/dp_10</item>
+        <item name="android:paddingLeft">@dimen/dp_10</item>
+        <item name="android:paddingTop">@dimen/dp_8</item>
+        <item name="android:paddingBottom">@dimen/dp_8</item>
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">11</item>
+    </style>
+
+    <!--获取验证码的edittext样式-->
+    <style name="get_sms_code">
+        <item name="android:drawableLeft">@drawable/icon_login_key</item>
+        <item name="android:background">@drawable/shape_rect_outline_d2d2d2_r6</item>
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_36</item>
+        <item name="android:paddingRight">@dimen/dp_10</item>
+        <item name="android:paddingLeft">@dimen/dp_10</item>
+        <item name="android:paddingTop">@dimen/dp_8</item>
+        <item name="android:paddingBottom">@dimen/dp_8</item>
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">6</item>
+    </style>
+
+    <!--按钮的公共样式-->
+    <style name="common_button">
+        <item name="android:minHeight">@dimen/dp_1</item>
+        <item name="android:layout_height">@dimen/dp_38</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/shape_gradient_ff875a_e60314</item>
+        <item name="android:layout_marginLeft">@dimen/dp_40</item>
+        <item name="android:layout_marginRight">@dimen/dp_40</item>
     </style>
 
 </resources>

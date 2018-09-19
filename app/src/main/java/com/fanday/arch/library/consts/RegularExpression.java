@@ -26,9 +26,9 @@ public interface RegularExpression {
     String EXPRESSION_URL = "[a-zA-z]+://[^\\s]*";
     //电子邮箱
     String EXPRESSION_EMAIL = "[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?";
-    //QQ
+    //icon_login_qq
     String EXPRESSION_QQ = "[1-9][0-9]{4,}";
-    //QQ
+    //icon_login_qq
     String EXPRESSION_ZIP_CODE = "[1-9]\\d{5}(?!\\d)";
      //6到15位密码
     String EXPRESSION_PWD_6_15 = "^[0-9a-zA-Z_#]{6,15}$";

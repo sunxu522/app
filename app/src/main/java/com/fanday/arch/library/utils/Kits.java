@@ -259,6 +259,9 @@ public class Kits {
         public static Drawable getDrawable(int resId) {
             return App.getInstance().getResources().getDrawable(resId);
         }
+        public static int getColor(int colorId) {
+            return App.getInstance().getResources().getColor(colorId);
+        }
 
         public static int getStatusBarHeight() {
             int result = 0;
