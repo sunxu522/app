@@ -3,20 +3,22 @@ package com.fanday.arch.common.base;
 import android.app.Application;
 import android.support.annotation.NonNull;
 
+import com.fanday.arch.interactor.Cons;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.tencent.smtt.sdk.QbSdk;
-import com.umeng.commonsdk.UMConfigure;
-import com.umeng.socialize.PlatformConfig;
+import com.tencent.tauth.Tencent;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import io.rong.imkit.RongIM;
 import okhttp3.OkHttpClient;
 
-import static com.tencent.smtt.sdk.QbSdk.getCurrentProcessName;
 
 
 /**
@@ -29,12 +31,14 @@ import static com.tencent.smtt.sdk.QbSdk.getCurrentProcessName;
 
 public class App extends Application {
     private static App instance;
+    public static IWXAPI iwxapi;
+    public static Tencent mTencent;
 
     @Override
     public void onCreate() {
         super.onCreate();
         //防止多进程导致多次初始化
-        if (getPackageName().equals(getCurrentProcessName(this))) {
+        if (getPackageName().equals(QbSdk.getCurrentProcessName(this))) {
             init();
         }
 
@@ -45,6 +49,16 @@ public class App extends Application {
         initUM();
         initX5();
         initOkGo();
+        initWXAndQQ();
+        RongIM.init(this);
+    }
+
+    private void initWXAndQQ() {
+        //初始化微信
+        iwxapi = WXAPIFactory.createWXAPI(this, Cons.ThirdAppKey.WX_APP_ID, true);
+        iwxapi.registerApp(Cons.ThirdAppKey.WX_APP_ID);
+        //初始化qq
+        mTencent = Tencent.createInstance(Cons.ThirdAppKey.QQ_AppID, this);
     }
 
     private void initOkGo() {
@@ -71,19 +85,6 @@ public class App extends Application {
     }
 
     private void initUM() {
-        /**
-         * 初始化common库
-         * 参数1:上下文，不能为空
-         * 参数2:【友盟+】 AppKey
-         * 参数3:【友盟+】 Channel
-         * 参数4:设备类型，UMConfigure.DEVICE_TYPE_PHONE为手机、UMConfigure.DEVICE_TYPE_BOX为盒子，默认为手机
-         * 参数5:Push推送业务的secret
-         */
-        UMConfigure.init(this, "59e727c5310c9366270000cf"
-                , "UMENG_CHANNEL", UMConfigure.DEVICE_TYPE_PHONE, "");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
-        PlatformConfig.setWeixin("wxdc1e388c3822c80b", "3baf1193c85774b3fd9d18447d76cab0");
-//        PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad","http://sns.whalecloud.com");
-        PlatformConfig.setQQZone("1106422531", "nsBCM26LC2dE4Gio");
     }
 
     private void initX5() {

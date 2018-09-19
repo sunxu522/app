@@ -1,21 +1,12 @@
 package com.fanday.arch.common.base;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import com.fanday.arch.R;
-import com.fanday.arch.library.dialog.LoadingDialog;
-import com.fanday.arch.library.net.API;
+import com.fanday.arch.ui.dialog.LoadingDialog;
+import com.fanday.arch.interactor.net.API;
 import com.gyf.barlibrary.ImmersionBar;
 
 import java.io.Serializable;
@@ -76,7 +67,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     /**
      * 初始化控件和监听器,一般的控件初始化、监听器初始化和网络请求都应该从这里开始
      */
-    protected abstract void initView();
+    protected void initView(){}
 
     protected void initListener() {
     }
@@ -113,7 +104,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void dismissLoading() {
-        //loadingDialog.dismiss();
+        loadingDialog.dismiss();
     }
 
     @Override

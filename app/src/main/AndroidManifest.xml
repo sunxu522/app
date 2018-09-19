@@ -60,18 +60,124 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
+        android:name=".common.base.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
+
+
+        <!-- ============================================================================================= -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path" />
+        </provider>
+
+
+        <meta-data
+            android:name="com.fanday.arch.library.loader.glide.GlideCache"
+            android:value="GlideModule" />
+
+        <!--融云配置-->
+        <receiver
+            android:name=".receiver.RongIMNotificationReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MESSAGE_CLICKED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED" />
+            </intent-filter>
+        </receiver>
+        <activity
+            android:name=".activity.rong.ConversationListActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="com.fanday.arch"
+                    android:pathPrefix="/conversationlist"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
+        <!--会话界面-->
+        <activity
+            android:name=".activity.rong.ConversationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="com.fanday.arch"
+                    android:pathPrefix="/conversation/"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
+
+
+        <!--支付宝配置-->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="com.alipay.sdk.app.H5AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <!-- QQ配置信息 -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1106295621" />
+            </intent-filter>
+        </activity>
+
+        <!--微信配置-->
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
     </application>
 
 </manifest>
