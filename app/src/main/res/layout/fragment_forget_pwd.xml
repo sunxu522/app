@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".login.activity.SmsLoginActivity">
+
+
+    <com.fanday.arch.ui.edittext.ClearEditText
+        android:layout_marginTop="@dimen/dp_80"
+        android:id="@+id/phoneNum"
+        android:inputType="number"
+        android:maxLength="11"
+        style="@style/clear_edit_text"
+        android:hint="请输入您的手机号" />
+    <com.fanday.arch.ui.edittext.ClearEditText
+        android:visibility="gone"
+        android:drawableLeft="@drawable/icon_login_email"
+        android:layout_marginTop="@dimen/dp_80"
+        android:id="@+id/email"
+        android:inputType="textWebEmailAddress"
+        android:digits="@string/email_reg_string"
+        style="@style/clear_edit_text"
+        android:hint="请输入您的邮箱" />
+
+    <com.fanday.arch.ui.edittext.SmsEditText
+        android:id="@+id/smsCode"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginRight="@dimen/dp_40"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.fanday.arch.ui.edittext.PwdEditText
+        android:layout_marginTop="@dimen/dp_15"
+        android:drawableLeft="@drawable/icon_login_lock"
+        android:id="@+id/newPwd"
+        android:hint="请输入新密码"
+        android:digits="@string/pwd_reg_string"
+        android:inputType="textPassword"
+        style="@style/clear_edit_text"/>
+    <com.fanday.arch.ui.edittext.PwdEditText
+        android:layout_marginTop="@dimen/dp_15"
+        android:drawableLeft="@drawable/icon_login_lock"
+        android:id="@+id/rePwd"
+        android:hint="请再次确认密码"
+        android:digits="@string/pwd_reg_string"
+        android:inputType="textPassword"
+        style="@style/clear_edit_text"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/submit"
+        android:enabled="false"
+        style="@style/common_button"
+        android:layout_marginTop="@dimen/dp_40"
+        android:text="提交"
+        />
+
+
+</LinearLayout>

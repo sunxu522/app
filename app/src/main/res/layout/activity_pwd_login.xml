@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".login.activity.SmsLoginActivity">
 
     <com.fanday.arch.ui.titlebar.CommonTitleBar
         android:layout_width="match_parent"
-        android:layout_height="44dp"
-        app:titleText="登陆" />
+        android:layout_height="@dimen/title_height"
+        app:titleText="密码登陆" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -22,41 +22,56 @@
     <com.fanday.arch.ui.edittext.ClearEditText
         android:id="@+id/phoneNum"
         style="@style/clear_edit_text"
+        android:maxLength="11"
+        android:inputType="number"
         android:hint="请输入11位手机号" />
 
-    <com.fanday.arch.ui.edittext.SmsEditText
-        android:id="@+id/smsCode"
-        android:layout_marginTop="@dimen/dp_15"
-        android:layout_marginLeft="@dimen/dp_40"
-        android:layout_marginRight="@dimen/dp_40"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <com.fanday.arch.ui.edittext.PwdEditText
+        android:drawableLeft="@drawable/icon_login_lock"
+        android:id="@+id/pwd"
+        android:hint="请输入账号密码"
+        android:digits="@string/pwd_reg_string"
+        android:inputType="textPassword"
+        style="@style/clear_edit_text"/>
 
-    <Button
-        android:id="@+id/smsLogin"
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/pwdLogin"
+        android:enabled="false"
         style="@style/common_button"
         android:layout_marginTop="@dimen/dp_20"
         android:text="登录"
         />
-    <Button
-        android:id="@+id/register"
-        android:background="@drawable/shape_rect_outline_e60516_r6"
-        style="@style/common_button"
-        android:layout_marginTop="@dimen/dp_15"
-        android:text="注册"
-        android:textColor="@color/color_e60516"
-        />
 
-    <TextView
-        android:id="@+id/pwdLogin"
-        android:layout_gravity="center_horizontal"
-        android:textSize="@dimen/sp_12"
-        android:textColor="@color/light_gray"
+    <LinearLayout
+        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginRight="@dimen/dp_40"
         android:layout_marginTop="@dimen/dp_15"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="账号密码登录"
-        />
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/smsLogin"
+            android:gravity="left"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/light_gray"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="验证码登录"
+            />
+        <TextView
+            android:id="@+id/foundPwd"
+            android:gravity="right"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/light_gray"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="找回密码"
+            />
+
+    </LinearLayout>
+
 
     <View
         android:layout_width="match_parent"

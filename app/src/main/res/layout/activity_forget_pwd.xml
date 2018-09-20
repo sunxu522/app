@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <com.fanday.arch.ui.titlebar.CommonTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        app:titleText="忘记密码" />
+    <com.fanday.arch.ui.tabs.TabsLayout
+        android:id="@+id/tabs_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        app:titles="手机找回,邮箱找回"/>
+
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>

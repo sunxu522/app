@@ -45,7 +45,7 @@ public class PwdEditText extends AppCompatEditText {
     }
 
     private void init() {
-        this.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        //this.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         this.setTransformationMethod(isShow ? HideReturnsTransformationMethod.getInstance()
                 : PasswordTransformationMethod.getInstance());
         this.setMaxLines(1);
@@ -72,7 +72,7 @@ public class PwdEditText extends AppCompatEditText {
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
             boolean touchable = event.getX() > (getWidth() - getTotalPaddingRight())
-                    && (event.getX() < ((getWidth() - getPaddingRight())));
+                    && (event.getX() < getWidth());
             if (touchable) {
                 isShow = !isShow;
                 this.setTransformationMethod(isShow ? HideReturnsTransformationMethod.getInstance()

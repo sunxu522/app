@@ -7,7 +7,7 @@
         <EditText
             android:id="@+id/sms_code"
             style="@style/get_sms_code"
-            android:hint="请输入手机号验证码" />
+            android:hint="请输入手机验证码" />
 
         <Button
             android:id="@+id/get_code"
@@ -21,5 +21,5 @@
             android:minWidth="@dimen/dp_1"
             android:text="获取验证码"
             android:textColor="@color/color_eb4a56"
-            android:textSize="@dimen/sp_10" />
+            android:textSize="@dimen/sp_12" />
 </RelativeLayout>

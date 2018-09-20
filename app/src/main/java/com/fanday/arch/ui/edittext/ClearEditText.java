@@ -50,6 +50,15 @@ public class ClearEditText extends AppCompatEditText implements View.OnFocusChan
         addTextChangedListener(this);
     }
 
+    /**
+     * 设置左边的icon
+     * @param drawable
+     */
+    public void setLeftIcon(Drawable drawable){
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), (int) (drawable.getMinimumHeight()));
+        this.setCompoundDrawables(drawable,getCompoundDrawables()[1],getCompoundDrawables()[2],getCompoundDrawables()[3]);
+    }
+
     /* @说明：isInnerWidth, isInnerHeight为ture，触摸点在删除图标之内，则视为点击了删除图标
      * event.getX() 获取相对应自身左上角的X坐标
      * event.getY() 获取相对应自身左上角的Y坐标
@@ -69,13 +78,8 @@ public class ClearEditText extends AppCompatEditText implements View.OnFocusChan
         if (event.getAction() == MotionEvent.ACTION_UP) {
             if (getCompoundDrawables()[2] != null) {
                 int x = (int)event.getX();
-                int y = (int)event.getY();
-                Rect rect = getCompoundDrawables()[2].getBounds();
-                int height = rect.height();
-                int distance = (getHeight() - height)/2;
-                boolean isInnerWidth = x > (getWidth() - getTotalPaddingRight()) && x < (getWidth() - getPaddingRight());
-                boolean isInnerHeight = y > distance && y <(distance + height);
-                if (isInnerWidth && isInnerHeight) {
+                boolean isInnerWidth = x > (getWidth() - getTotalPaddingRight()) && x < getWidth();
+                if (isInnerWidth) {
                     this.setText("");
                 }
             }

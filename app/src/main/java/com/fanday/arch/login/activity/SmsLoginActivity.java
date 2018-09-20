@@ -1,19 +1,19 @@
-package com.fanday.arch;
+package com.fanday.arch.login.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fanday.arch.R;
 import com.fanday.arch.bean.Person;
 import com.fanday.arch.common.base.BaseActivity;
 import com.fanday.arch.interactor.net.API;
 import com.fanday.arch.interactor.net.JsonCallBack;
 import com.fanday.arch.library.third.ThirdLogin;
-import com.fanday.arch.library.utils.Kits;
 import com.fanday.arch.ui.edittext.ClearEditText;
 import com.fanday.arch.ui.edittext.SmsEditText;
+import com.fanday.arch.ui.edittext.ValidateWather;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.UiError;
 
@@ -21,10 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity {
+public class SmsLoginActivity extends BaseActivity {
     @BindView(R.id.phoneNum)
     ClearEditText phoneNum;
     @BindView(R.id.smsCode)
@@ -42,9 +41,15 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_main;
+        return R.layout.activity_sms_login;
     }
 
+    @Override
+    protected void initListener() {
+        ValidateWather wather = new ValidateWather(ValidateWather.TYPE.PHONE,
+                smsLogin,phoneNum,smsCode.getSmsEdit());
+        wather.watch();
+    }
 
     @Override
     protected void initData() {
@@ -66,8 +71,10 @@ public class MainActivity extends BaseActivity {
             case R.id.smsLogin:
                 break;
             case R.id.register:
+                startActivity(RegisterActivity.class);
                 break;
             case R.id.pwdLogin:
+                startActivityAndFinished(PwdLoginActivity.class);
                 break;
             case R.id.qqLogin:
                 ThirdLogin.get().qqLogin(this, new IUiListener() {

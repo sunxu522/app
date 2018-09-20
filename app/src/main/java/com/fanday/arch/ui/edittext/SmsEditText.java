@@ -46,6 +46,22 @@ public class SmsEditText extends FrameLayout {
         EditText editText = (EditText) this.findViewById(R.id.sms_code);
         return editText.getText().toString();
     }
+    /**
+     * 获取EditText
+     * @return
+     */
+    public EditText getSmsEdit(){
+        EditText editText = (EditText) this.findViewById(R.id.sms_code);
+        return editText;
+    }
+
+    /**
+     * 获取右边的Button
+     * @return
+     */
+    public Button getRightButton(){
+        return (Button)findViewById(R.id.get_code);
+    }
 
     /**
      * 设置左边的icon

@@ -67,12 +67,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".login.activity.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".login.activity.PwdLoginActivity"/>
+        <activity android:name=".login.activity.SmsLoginActivity"/>
+        <activity android:name=".login.activity.ForgetPwdActivity"/>
+        <activity android:name=".login.activity.SetPwdSuccessActivity"/>
+<!--        <activity android:name=".login.activity.RegisterActivity"/>-->
+
+
+
+
+
+
+
+
+
+
 
 
 

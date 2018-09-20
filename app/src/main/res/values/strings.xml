@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Base</string>
+    <string name="pwd_reg_string"> .@~-,:*?!#/\\=+?^;%$()[]{}|`&lt;&gt;&amp;&quot;&apos;_0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ</string>
+    <string name="email_reg_string">.@_0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ</string>
 </resources>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".login.activity.SmsLoginActivity">
+
+    <com.fanday.arch.ui.titlebar.CommonTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        app:titleText="登陆" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_30"
+        android:src="@drawable/icon_logo" />
+
+    <com.fanday.arch.ui.edittext.ClearEditText
+        android:id="@+id/phoneNum"
+        android:inputType="number"
+        android:maxLength="11"
+        style="@style/clear_edit_text"
+        android:hint="请输入11位手机号" />
+
+    <com.fanday.arch.ui.edittext.SmsEditText
+        android:id="@+id/smsCode"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginRight="@dimen/dp_40"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:enabled="false"
+        android:id="@+id/smsLogin"
+        style="@style/common_button"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="验证码登录"
+        />
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/register"
+        android:background="@drawable/shape_rect_outline_e60516_r6"
+        style="@style/common_button"
+        android:layout_marginTop="@dimen/dp_15"
+        android:text="注册"
+        android:textColor="@color/color_e60516"
+        />
+
+    <TextView
+        android:id="@+id/pwdLogin"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/sp_12"
+        android:textColor="@color/light_gray"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="账号密码登录"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        />
+
+
+    <LinearLayout
+        android:gravity="center|bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:src="@drawable/icon_third_login" />
+        <LinearLayout
+            android:layout_marginBottom="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/qqLogin"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_login_qq" />
+            <ImageView
+                android:id="@+id/wxLogin"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_login_wx" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

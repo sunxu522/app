@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.fanday.arch.interactor.net.API;
 import com.fanday.arch.ui.dialog.LoadingDialog;
-import com.gyf.barlibrary.ImmersionBar;
 
 import java.io.Serializable;
 
@@ -28,7 +28,6 @@ public abstract class BaseFragment extends Fragment implements BaseView{
     protected Activity mActivity;
     protected Context mContext;
     protected View mRootView;
-    protected ImmersionBar mImmersionBar;
     private Unbinder unbinder;
     private LoadingDialog loadingDialog;
 
@@ -59,12 +58,9 @@ public abstract class BaseFragment extends Fragment implements BaseView{
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (isImmersionBarEnabled()) {
-            initImmersionBar();
-        }
         initView();
         initData();
-        setListener();
+        initListener();
     }
 
 
@@ -78,10 +74,9 @@ public abstract class BaseFragment extends Fragment implements BaseView{
             loadingDialog.cancel();
             loadingDialog.dismiss();
         }
-        if (mImmersionBar != null) {
-            mImmersionBar.destroy();
-        }
 
+        //关闭正在执行的请求
+        API.cancel(this);
     }
 
     @Override
@@ -95,7 +90,6 @@ public abstract class BaseFragment extends Fragment implements BaseView{
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            if(mImmersionBar != null) mImmersionBar.init();
             refresh();
         }
     }
@@ -105,29 +99,6 @@ public abstract class BaseFragment extends Fragment implements BaseView{
     }
 
     protected abstract int getLayoutId();
-
-    /**
-     * 是否在Fragment使用沉浸式
-     *
-     * @return the boolean
-     */
-
-    protected boolean isImmersionBarEnabled() {
-        return true;
-    }
-
-    /**
-     * 初始化沉浸式
-     */
-    protected void initImmersionBar() {
-//        mImmersionBar = ImmersionBar.with(this).statusBarColor(fragmentThemeColor()).fitsSystemWindows(false).keyboardEnable(true);
-//        mImmersionBar.keyboardEnable(true).navigationBarWithKitkatEnable(false).init();
-
-        //在BaseActivity里初始化
-        mImmersionBar = ImmersionBar.with(this);
-        mImmersionBar.init();
-    }
-
 
     /**
      * view与数据绑定
@@ -140,7 +111,7 @@ public abstract class BaseFragment extends Fragment implements BaseView{
      * 设置监听
      */
 
-    protected void setListener(){}
+    protected void initListener(){}
 
     /**
      * 初始化数据

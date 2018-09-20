@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <com.fanday.arch.ui.titlebar.CommonTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        app:titleText="忘记密码" />
+
+    <ImageView
+        android:layout_marginTop="@dimen/dp_80"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_set_pwd_success"/>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="密码设置成功"
+        android:textStyle="bold"
+        android:textSize="@dimen/sp_18"
+        android:layout_marginTop="@dimen/dp_10"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="恭喜您已成功修改密码,现在可以去登录了"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/light_gray"
+        android:layout_marginTop="@dimen/dp_10"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/login"
+        style="@style/common_button"
+        android:layout_marginTop="@dimen/dp_60"
+        android:text="立即登录"
+        />
+
+</LinearLayout>
