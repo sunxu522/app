@@ -1,11 +1,16 @@
 package com.fanday.arch.ui.edittext;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,11 +18,18 @@ import android.widget.EditText;
 
 import com.fanday.arch.R;
 
-public class PwdEditText extends AppCompatEditText implements View.OnFocusChangeListener,
-        TextWatcher {
-    //EditText右侧的删除按钮
-    private Drawable mClearDrawable;
-    private boolean hasFoucs;
+public class PwdEditText extends AppCompatEditText {
+    /**
+     * 删除按钮的引用
+     */
+    private Drawable visibleDrawable;
+    private Drawable inVisibleDrawable;
+    /**
+     * 控件是否有焦点
+     */
+
+    private boolean isShow ;
+
 
     public PwdEditText(Context context) {
         this(context, null);
@@ -33,106 +45,51 @@ public class PwdEditText extends AppCompatEditText implements View.OnFocusChange
     }
 
     private void init() {
-        // 获取EditText的DrawableRight,假如没有设置我们就使用默认的图片,获取图片的顺序是左上右下（0,1,2,3,）
-        mClearDrawable = getCompoundDrawables()[2];
-        if (mClearDrawable == null) {
-            mClearDrawable = getResources().getDrawable(
-                    R.drawable.icon_login_del);
-        }
+        this.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        this.setTransformationMethod(isShow ? HideReturnsTransformationMethod.getInstance()
+                : PasswordTransformationMethod.getInstance());
+        this.setMaxLines(1);
+        this.setPadding(this.getPaddingLeft()!=0?this.getPaddingLeft():0,
+                this.getPaddingTop()!=0?this.getPaddingTop():0,
+                this.getPaddingRight()!=0?this.getPaddingRight():0,
+                this.getPaddingBottom()!=0?this.getPaddingBottom():0);
+        this.setEllipsize(TextUtils.TruncateAt.END);
+        visibleDrawable=getResources().getDrawable(R.drawable.icon_pwd_show);
+        visibleDrawable.setBounds(0, 0, visibleDrawable.getIntrinsicWidth(), visibleDrawable.getIntrinsicHeight());
 
-        mClearDrawable.setBounds(0, 0, mClearDrawable.getIntrinsicWidth(),
-                mClearDrawable.getIntrinsicHeight());
-        // 默认设置隐藏图标
-        setClearIconVisible(false);
-        // 设置焦点改变的监听
-        setOnFocusChangeListener(this);
-        // 设置输入框里面内容发生改变的监听
-        addTextChangedListener(this);
+        inVisibleDrawable=getResources().getDrawable(R.drawable.icon_pwd_hide);
+        inVisibleDrawable.setBounds(0, 0, inVisibleDrawable.getIntrinsicWidth(), inVisibleDrawable.getIntrinsicHeight());
+        setPwdIcon(inVisibleDrawable);
     }
 
-    /* @说明：isInnerWidth, isInnerHeight为ture，触摸点在删除图标之内，则视为点击了删除图标
-     * event.getX() 获取相对应自身左上角的X坐标
-     * event.getY() 获取相对应自身左上角的Y坐标
-     * getWidth() 获取控件的宽度
-     * getHeight() 获取控件的高度
-     * getTotalPaddingRight() 获取删除图标左边缘到控件右边缘的距离
-     * getPaddingRight() 获取删除图标右边缘到控件右边缘的距离
-     * isInnerWidth:
-     * 	getWidth() - getTotalPaddingRight() 计算删除图标左边缘到控件左边缘的距离
-     * 	getWidth() - getPaddingRight() 计算删除图标右边缘到控件左边缘的距离
-     * isInnerHeight:
-     * 	distance 删除图标顶部边缘到控件顶部边缘的距离
-     *  distance + height 删除图标底部边缘到控件顶部边缘的距离
+
+    /**
+     * 因为我们不能直接给EditText设置点击事件，所以我们用记住我们按下的位置来模拟点击事件
+     * 当我们按下的位置 在  EditText的宽度 - 图标到控件右边的间距 - 图标的宽度  和
+     * EditText的宽度 - 图标到控件右边的间距之间我们就算点击了图标，竖直方向就没有考虑
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
-            if (getCompoundDrawables()[2] != null) {
-                int x = (int)event.getX();
-                int y = (int)event.getY();
-                Rect rect = getCompoundDrawables()[2].getBounds();
-                int height = rect.height();
-                int distance = (getHeight() - height)/2;
-                boolean isInnerWidth = x > (getWidth() - getTotalPaddingRight()) && x < (getWidth() - getPaddingRight());
-                boolean isInnerHeight = y > distance && y <(distance + height);
-                if (isInnerWidth && isInnerHeight) {
-                    dealClick();
-                }
+            boolean touchable = event.getX() > (getWidth() - getTotalPaddingRight())
+                    && (event.getX() < ((getWidth() - getPaddingRight())));
+            if (touchable) {
+                isShow = !isShow;
+                this.setTransformationMethod(isShow ? HideReturnsTransformationMethod.getInstance()
+                        : PasswordTransformationMethod.getInstance());
+                setPwdIcon(isShow?visibleDrawable:inVisibleDrawable);
+                this.setSelection(this.getText().length());
             }
         }
         return super.onTouchEvent(event);
     }
 
-    private void dealClick() {
-//        if (showPassword) {// 显示密码
-//            iv_showPassword.setImageDrawable(getResources().getDrawable(R.drawable.eye_o));
-//            et_passwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-//            et_passwd.setSelection(et_passwd.getText().toString().length());
-//            showPassword = !showPassword;
-//        } else {// 隐藏密码
-//            iv_showPassword.setImageDrawable(getResources().getDrawable(R.drawable.eye_c));
-//            et_passwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-//            et_passwd.setSelection(et_passwd.getText().toString().length());
-//            showPassword = !showPassword;
-//        }
-    }
-
     /**
-     * 当ClearEditText焦点发生变化的时候，
-     * 输入长度为零，隐藏删除图标，否则，显示删除图标
+     * 设置清除图标的显示与隐藏，调用setCompoundDrawables为EditText绘制上去
      */
-    @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        this.hasFoucs = hasFocus;
-        if (hasFocus) {
-            setClearIconVisible(getText().length() > 0);
-        } else {
-            setClearIconVisible(false);
-        }
-    }
-
-    protected void setClearIconVisible(boolean visible) {
-        Drawable right = visible ? mClearDrawable : null;
+    protected void setPwdIcon(Drawable drawable) {
         setCompoundDrawables(getCompoundDrawables()[0],
-                getCompoundDrawables()[1], right, getCompoundDrawables()[3]);
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int count, int after) {
-        if (hasFoucs) {
-            setClearIconVisible(s.length() > 0);
-        }
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count,
-                                  int after) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-
+                getCompoundDrawables()[1], drawable, getCompoundDrawables()[3]);
     }
 
 

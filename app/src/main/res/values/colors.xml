@@ -11,6 +11,8 @@
     <color name="color_eb4a56">#eb4a56</color>
     <color name="transparent">@android:color/transparent</color>
     <color name="gray">#6b6969</color>
+    <color name="red">#ff0000</color>
+    <color name="black">#000000</color>
     <color name="light_gray">#a19f9f</color>
     <color name="color_e60516">#e60516</color>
 </resources>

@@ -46,7 +46,7 @@
     <style name="get_sms_code">
         <item name="android:drawableLeft">@drawable/icon_login_key</item>
         <item name="android:background">@drawable/shape_rect_outline_d2d2d2_r6</item>
-        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textSize">@dimen/sp_14</item>
         <item name="android:drawablePadding">@dimen/dp_5</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dp_36</item>
